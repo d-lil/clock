@@ -13,12 +13,16 @@
 }
 
 html {
-  background: skyblue;
+  background-image: url('https://southparkstudios.mtvnimages.com/shared/locations/busstop.jpg'); /* Replace 'your-image.jpg' with the path to your image */
+  background-size: cover; /* Adjust the image size to cover the entire viewport */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed;
   text-align: center;
   font-size: 10px;
 }
 
 body {
+
   margin: 0;  
   justify-content: center;
   font-size: 2rem;
@@ -32,10 +36,10 @@ body {
   width: 35rem;
   height: 35rem;
   border: 3px solid #282828;
-  box-shadow: -4px -4px 10px rgba(67,67,67,0.5),
+  box-shadow: 4px 4px 220px rgb(255, 255, 255),
                 inset 4px 4px 10px rgba(0,0,0,0.5),
                 inset -4px -4px 10px rgba(67,67,67,0.5),
-                4px 4px 10px rgba(0,0,0,0.3);
+                4px 4px 110px rgb(137, 250, 244);
   border-radius: 50%;
   margin: 50px auto; 
   padding: 2rem;
@@ -46,7 +50,7 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 100%;
-  background: dimgray;
+  background: gray;
   overflow: hidden;
 }
 
@@ -63,13 +67,13 @@ body {
   position: absolute;
   width: 5px;
   height: 100%;
-  background: #F08000;
+  background: #ff7636;
   z-index: 0;
   left: 49.5%;
 }
 
 .outer-clock-face .marking {
-  background: #FF5F1F;
+  background: #f08f56;
   width: 6px;
 }
 
@@ -103,7 +107,7 @@ body {
   left: 10%;
   width: 80%;
   height: 80%;
-  background: dimgray;
+  background: gray;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -120,7 +124,7 @@ body {
   border-radius: 18px;
   margin-left: -9px;
   margin-top: -6px;
-  background: slategray;
+  background: #282828;
   z-index: 11;
 }
 
@@ -130,7 +134,7 @@ body {
   left: 10%;
   width: 80%;
   height: 80%;
-  background: gray;
+  background: transparent;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -147,6 +151,9 @@ body {
   height: 20%;
   text-align: center;
   color: white;
+  font-size: 30px;
+  font-family: helvetica;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .number-1 { left: 72%; top: 17%; transform: translate(-50%, -50%); }
@@ -166,7 +173,7 @@ body {
   width: 50%;
   right: 50%;
   height: 12px;
-  background: #61afff;
+  background: linear-gradient(to right, #85b9f5, #4ea9ff);
   position: absolute;
   top: 50%;
   border-radius: 4px;
@@ -187,7 +194,7 @@ body {
 }
 
 .hand.second-hand {
-  background: silver;
+  background: white;
   width: 45%;
   height: 2px;
 }
@@ -197,7 +204,27 @@ div {
   border-radius: 50%;
 }
 
-.button {
+.goButton {
+  height: 35px;
+  width: 100px;
+  background-color: rgb(1, 194, 33);
+  border: 2px solid black;
+  color: white;
+  padding: 5px 10px;  
+  display: inline-block;
+  font-family: helvetica;
+  font-size: 16px;
+  margin: 10px 0px;
+  cursor: pointer;
+  opacity: 0.75;
+  border-radius: 4px;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.goButton:hover {opacity: 1}
+
+.clrButton {
   height: 35px;
   width: 100px;
   background-color: orangered;
@@ -212,9 +239,10 @@ div {
   opacity: 0.75;
   border-radius: 4px;
   transition: 0.3s;
+  font-weight: bold;
 }
 
-.button:hover {opacity: 1}
+.clrButton:hover {opacity: 1}
 
 
 
@@ -222,7 +250,8 @@ label{
   
   font-size: 20px;
   font-family: helvetica; 
-  color: #343434;  
+  color: white;
+  font-weight: bold;
 }
 
 span{
@@ -230,7 +259,7 @@ span{
 }
 
 aside {
-  background-color: steelblue;
+  background-color: rgb(83, 54, 40);
   position: fixed;
 
   left: 0;
@@ -243,6 +272,7 @@ aside {
   margin: 0;
   margin-top: 20px;
   text-align: center;
+
 }
 </style>
 </head>
@@ -252,14 +282,17 @@ aside {
     <ul class="asideList">
       <label for="yelT">Start</label>  
       <span><input type="time" id="yelT" name="yelT" step="60"></span>
+      <br>
       <label for="grnT">Green start</label>
       <span><input type="time" id="grnT" name="grnT" step="60"></span>
+        <br>
       <label for="redT">Red start</label>
       <span><input type="time" id="redT" name="redT" step="60"></span>
+        <br>
       <label for="endT">End</label>
       <span><input type="time" id="endT" name="endT" step="60"></span>
-      <input id="goBtn" type="button" class="button" value="GO!">
-      <input id="clrBtn" type="button" class="button" value="Reset">
+      <input id="goBtn" type="button" class="goButton" value="GO!">
+      <input id="clrBtn" type="button" class="clrButton" value="Reset">
     </ul>
   </aside>
     <div class="clock">
@@ -269,37 +302,39 @@ aside {
           <div class="marking marking-three"></div>
           <div class="marking marking-four"></div>
           <div class="inner-clock-face">
+            <div class="number number-1"><b>1</b></div>
+            <div class="number number-2"><b>2</b></div>
+            <div class="number number-3"><b>3</b></div>
+            <div class="number number-4"><b>4</b></div>
+            <div class="number number-5"><b>5</b></div>
+            <div class="number number-6"><b>6</b></div>
+            <div class="number number-7"><b>7</b></div>
+            <div class="number number-8"><b>8</b></div>
+            <div class="number number-9"><b>9</b></div>
+            <div class="number number-10"><b>10</b></div>
+            <div class="number number-11"><b>11</b></div>
+            <div class="number number-12"><b>12</b></div>
           <div class="inner-clock-face2">
             <div class="hand hour-hand" style="transform: rotate(701.5deg);"></div>
             <div class="hand min-hand" style="transform: rotate(230.8deg);"></div>
             <div class="hand second-hand" style="transform: rotate(258deg);"></div>
-            <div class="number number-1">1</div>
-            <div class="number number-2">2</div>
-            <div class="number number-3">3</div>
-            <div class="number number-4">4</div>
-            <div class="number number-5">5</div>
-            <div class="number number-6">6</div>
-            <div class="number number-7">7</div>
-            <div class="number number-8">8</div>
-            <div class="number number-9">9</div>
-            <div class="number number-10">10</div>
-            <div class="number number-11">11</div>
-            <div class="number number-12">12</div>
+
 
           </div>
         </div>
       </div>
 
 <script>
-function subTime(t,x) {   
+function subTime(t,x) {
         var t1 = t.split(':');
-        var x1 = x.split(':'); 
+        var x1 = x.split(':');
         var tx1 =(parseInt(x1[1])- parseInt(t1[1]));        
         if(tx1<0){tx1+=60;tx1+t1[1];}
         return tx1=tx1*6;
 }
 
 document.getElementById('goBtn').addEventListener('click', function() {
+    console.log("goBtn clicked")
     var yelS = document.getElementById('yelT').value;
     var grnS = document.getElementById('grnT').value;
     var redS = document.getElementById('redT').value;
